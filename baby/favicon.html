@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Generate Favicon</title>
+</head>
+<body>
+    <canvas id="canvas" width="32" height="32" style="display:none;"></canvas>
+    <script>
+        // Create a simple favicon
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+        
+        // Draw a simple baby/pregnancy icon
+        ctx.fillStyle = '#2563eb';
+        ctx.fillRect(0, 0, 32, 32);
+        
+        // Draw a heart shape
+        ctx.fillStyle = '#ffffff';
+        ctx.beginPath();
+        ctx.moveTo(16, 28);
+        ctx.bezierCurveTo(16, 24, 8, 20, 8, 16);
+        ctx.bezierCurveTo(8, 12, 12, 8, 16, 8);
+        ctx.bezierCurveTo(20, 8, 24, 12, 24, 16);
+        ctx.bezierCurveTo(24, 20, 16, 24, 16, 28);
+        ctx.fill();
+        
+        // Convert to favicon
+        const link = document.createElement('link');
+        link.rel = 'icon';
+        link.type = 'image/x-icon';
+        link.href = canvas.toDataURL('image/x-icon');
+        document.head.appendChild(link);
+        
+        // Also create a download link
+        const downloadLink = document.createElement('a');
+        downloadLink.href = canvas.toDataURL('image/x-icon');
+        downloadLink.download = 'favicon.ico';
+        downloadLink.textContent = 'Download favicon.ico';
+        downloadLink.style.display = 'block';
+        downloadLink.style.margin = '20px';
+        document.body.appendChild(downloadLink);
+        
+        document.body.innerHTML = '<h1>Favicon Generated!</h1><p>Right-click the download link and save as "favicon.ico" in your app directory.</p>' + document.body.innerHTML;
+    </script>
+</body>
+</html>

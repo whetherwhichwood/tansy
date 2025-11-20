@@ -1,0 +1,58 @@
+version: '3.8'
+
+services:
+  # PostgreSQL Database
+  postgres:
+    image: postgres:16
+    container_name: runescape-postgres-simple
+    environment:
+      POSTGRES_DB: runescape_bot
+      POSTGRES_USER: runescape_user
+      POSTGRES_PASSWORD: runescape_password
+    ports:
+      - "5434:5432"  # Different port to avoid conflicts
+    volumes:
+      - postgres_data_simple:/var/lib/postgresql/data
+    networks:
+      - runescape-network
+
+  # Redis for caching
+  redis:
+    image: redis:7-alpine
+    container_name: runescape-redis-simple
+    ports:
+      - "6381:6379"  # Different port to avoid conflicts
+    volumes:
+      - redis_data_simple:/data
+    networks:
+      - runescape-network
+
+  # Simple Bot Application
+  runescape-bot:
+    image: python:3.11-slim
+    container_name: runescape-bot-simple
+    environment:
+      - DATABASE_URL=postgresql://runescape_user:runescape_password@postgres:5432/runescape_bot
+      - REDIS_URL=redis://redis:6379
+      - BOT_ENV=development
+    ports:
+      - "8082:8080"
+    volumes:
+      - ./main.py:/app/main.py
+      - ./logs:/app/logs
+    working_dir: /app
+    command: python main.py
+    depends_on:
+      - postgres
+      - redis
+    networks:
+      - runescape-network
+    restart: unless-stopped
+
+volumes:
+  postgres_data_simple:
+  redis_data_simple:
+
+networks:
+  runescape-network:
+    driver: bridge

@@ -1,0 +1,85 @@
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+  
+  /* Keeper Color Palette */
+  --primary: #475569;
+  --primary-light: #64748b;
+  --accent: #10b981;
+  --urgent-red: #ef4444;
+  --warning-yellow: #f59e0b;
+  --success-green: #10b981;
+  --neutral-50: #f1f5f9;
+  --neutral-100: #e2e8f0;
+  --neutral-200: #cbd5e1;
+  --neutral-300: #94a3b8;
+  --neutral-400: #64748b;
+  --neutral-500: #475569;
+  --neutral-600: #334155;
+  --neutral-700: #1e293b;
+  --neutral-800: #0f172a;
+  --neutral-900: #020617;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-primary: var(--primary);
+  --color-primary-light: var(--primary-light);
+  --color-accent: var(--accent);
+  --color-urgent-red: var(--urgent-red);
+  --color-warning-yellow: var(--warning-yellow);
+  --color-success-green: var(--success-green);
+  --color-neutral-50: var(--neutral-50);
+  --color-neutral-100: var(--neutral-100);
+  --color-neutral-200: var(--neutral-200);
+  --color-neutral-300: var(--neutral-300);
+  --color-neutral-400: var(--neutral-400);
+  --color-neutral-500: var(--neutral-500);
+  --color-neutral-600: var(--neutral-600);
+  --color-neutral-700: var(--neutral-700);
+  --color-neutral-800: var(--neutral-800);
+  --color-neutral-900: var(--neutral-900);
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+/* Custom utility classes */
+.text-urgent {
+  color: var(--urgent-red);
+}
+
+.text-warning {
+  color: var(--warning-yellow);
+}
+
+.text-success {
+  color: var(--success-green);
+}
+
+.bg-urgent {
+  background-color: var(--urgent-red);
+}
+
+.bg-warning {
+  background-color: var(--warning-yellow);
+}
+
+.bg-success {
+  background-color: var(--success-green);
+}

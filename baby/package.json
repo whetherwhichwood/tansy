@@ -1,0 +1,27 @@
+{
+  "name": "baby-tracker",
+  "version": "1.0.0",
+  "description": "Pregnancy Companion - Baby Tracker PWA",
+  "main": "index.html",
+  "scripts": {
+    "dev": "http-server -p 3003 -o",
+    "start": "http-server -p 3003",
+    "build": "echo 'Static app - no build needed'",
+    "deploy": "echo 'Deploy static files to your hosting provider'"
+  },
+  "keywords": ["pregnancy", "baby", "tracker", "pwa", "health"],
+  "author": "Griffin Baker",
+  "license": "MIT",
+  "devDependencies": {
+    "http-server": "^14.1.1"
+  },
+  "dependencies": {}
+}
+
+
+
+
+
+
+
+

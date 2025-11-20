@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<title>Pregnancy Companion - Sneak Peek</title>
+	<link rel="manifest" href="manifest.json" />
+	<meta name="theme-color" content="#2563eb" />
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="apple-mobile-web-app-status-bar-style" content="default" />
+	<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+	<div class="app">
+		<header class="header">
+			<div class="header-content">
+				<h1>Pregnancy Companion - Sneak Peek 👀</h1>
+				<div class="user-info">
+					<button id="createAccountBtn" class="btn-primary">Create Account</button>
+					<button id="backBtn" class="btn-ghost">Back</button>
+				</div>
+			</div>
+		</header>
+
+		<main id="app">
+			<!-- Sneak peek content will be rendered here -->
+		</main>
+
+		<footer class="footer">
+			<small id="footerDisclaimer">Educational info only; not medical advice. Consult your provider.</small>
+		</footer>
+	</div>
+
+	<script type="module" src="sneakpeek.js"></script>
+	<script>
+	if ('serviceWorker' in navigator) {
+		window.addEventListener('load', () => {
+			navigator.serviceWorker.register('service-worker.js');
+		});
+	}
+	</script>
+</body>
+</html>

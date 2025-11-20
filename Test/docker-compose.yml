@@ -1,0 +1,68 @@
+version: '3.8'
+
+services:
+  # PostgreSQL Database
+  postgres:
+    image: postgres:16
+    container_name: ichra-postgres
+    environment:
+      POSTGRES_DB: ichra_db
+      POSTGRES_USER: ichra_user
+      POSTGRES_PASSWORD: ichra_password
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./init-db.sql:/docker-entrypoint-initdb.d/init-db.sql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ichra_user -d ichra_db"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Backend API
+  api:
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    container_name: ichra-api
+    environment:
+      NODE_ENV: development
+      DATABASE_URL: postgresql://ichra_user:ichra_password@postgres:5432/ichra_db
+      JWT_SECRET: your-super-secret-jwt-key-here
+      JWT_EXPIRATION: 15m
+      CORS_ORIGIN: http://localhost:3000
+    ports:
+      - "5000:5000"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    volumes:
+      - ./server:/app
+      - /app/node_modules
+    command: npm run dev
+
+  # Frontend
+  web:
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+    container_name: ichra-web
+    environment:
+      VITE_API_URL: http://localhost:5000/api
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./client:/app
+      - /app/node_modules
+    command: npm run dev
+
+volumes:
+  postgres_data:
+
+
+
+
+
+
+

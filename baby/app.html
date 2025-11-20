@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<title id="pageTitle">Pregnancy Companion - Weekly Details</title>
+	<link rel="manifest" href="manifest.json" />
+	<meta name="theme-color" content="#2563eb" />
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="apple-mobile-web-app-status-bar-style" content="default" />
+	<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+	<div class="app">
+		<header class="header">
+			<div class="header-content">
+				<h1 id="pageHeader">Weekly Details 📅</h1>
+				<div class="user-info">
+					<button id="homeBtn" class="btn-ghost">🏠 Home</button>
+					<button id="logoutBtn" class="btn-ghost">Logout</button>
+				</div>
+			</div>
+		</header>
+
+		<main id="app">
+			<!-- Weekly content will be rendered here -->
+		</main>
+
+		<footer class="footer">
+			<small id="footerDisclaimer">Educational info only; not medical advice. Consult your provider.</small>
+		</footer>
+
+		<!-- Change Due Date Modal -->
+		<div id="dueDateModal" class="modal hidden">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h3 id="modalTitle">Change Due Date</h3>
+					<button class="close-btn" id="closeModal">&times;</button>
+				</div>
+				<div class="modal-body">
+					<p class="subtle" id="modalDescription">Update your due date to recalculate your pregnancy progress.</p>
+					<div class="input-row">
+						<label for="newDueDate" id="modalLabel">Due Date:</label>
+						<input type="date" id="newDueDate" />
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button class="btn-ghost" id="cancelBtn">Cancel</button>
+					<button class="btn-primary" id="saveDueDateBtn">Save Changes</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script type="module" src="app.js"></script>
+	<script>
+	if ('serviceWorker' in navigator) {
+		window.addEventListener('load', () => {
+			navigator.serviceWorker.register('service-worker.js');
+		});
+	}
+	</script>
+</body>
+</html>

@@ -1,0 +1,135 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model HOA {
+  id          String   @id @default(cuid())
+  name        String
+  address     String
+  inviteCode  String   @unique
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  residents     Resident[]
+  posts         Post[]
+  announcements Announcement[]
+
+  @@map("hoas")
+}
+
+model Resident {
+  id               String   @id @default(cuid())
+  hoaId            String
+  email            String   @unique
+  name             String
+  address          String
+  verificationCode String?
+  isVerified       Boolean  @default(false)
+  reputationScore  Int      @default(0)
+  badges           Json     @default("{}") // { "👍": 0, "💬": 0, "⏱️": 0 }
+  avatar           String?
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+
+  hoa              HOA       @relation(fields: [hoaId], references: [id], onDelete: Cascade)
+  authoredPosts    Post[]    @relation("PostAuthor")
+  claimedPosts     Post[]    @relation("PostClaimer")
+  sentMessages     Message[] @relation("MessageSender")
+  sentFeedback     Feedback[] @relation("FeedbackFrom")
+  receivedFeedback Feedback[] @relation("FeedbackTo")
+
+  @@map("residents")
+}
+
+model Post {
+  id          String   @id @default(cuid())
+  authorId    String
+  hoaId       String
+  title       String
+  description String
+  category    PostCategory
+  status      PostStatus @default(OPEN)
+  claimedById String?
+  createdAt   DateTime @default(now())
+  completedAt DateTime?
+
+  author    Resident @relation("PostAuthor", fields: [authorId], references: [id], onDelete: Cascade)
+  claimer   Resident? @relation("PostClaimer", fields: [claimedById], references: [id], onDelete: SetNull)
+  hoa       HOA      @relation(fields: [hoaId], references: [id], onDelete: Cascade)
+  messages  Message[]
+  feedback  Feedback[]
+
+  @@map("posts")
+}
+
+model Message {
+  id        String   @id @default(cuid())
+  postId    String
+  senderId  String
+  content   String
+  createdAt DateTime @default(now())
+
+  post   Post     @relation(fields: [postId], references: [id], onDelete: Cascade)
+  sender Resident @relation("MessageSender", fields: [senderId], references: [id], onDelete: Cascade)
+
+  @@map("messages")
+}
+
+model Feedback {
+  id              String   @id @default(cuid())
+  postId          String
+  fromResidentId  String
+  toResidentId    String
+  badges          String[] // ["👍", "💬", "⏱️"]
+  comment         String?
+  createdAt       DateTime @default(now())
+
+  post         Post     @relation(fields: [postId], references: [id], onDelete: Cascade)
+  fromResident Resident @relation("FeedbackFrom", fields: [fromResidentId], references: [id], onDelete: Cascade)
+  toResident   Resident @relation("FeedbackTo", fields: [toResidentId], references: [id], onDelete: Cascade)
+
+  @@map("feedback")
+}
+
+model Announcement {
+  id        String   @id @default(cuid())
+  hoaId     String
+  title     String
+  content   String
+  isPinned  Boolean  @default(false)
+  createdAt DateTime @default(now())
+
+  hoa HOA @relation(fields: [hoaId], references: [id], onDelete: Cascade)
+
+  @@map("announcements")
+}
+
+enum PostCategory {
+  HELP_NEEDED
+  BORROW_LEND
+  GROUP_BUY
+  LOCAL_TIP
+}
+
+enum PostStatus {
+  OPEN
+  CLAIMED
+  COMPLETED
+  CANCELLED
+}
+
+
+
+
+
+
+
+

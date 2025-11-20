@@ -1,0 +1,11 @@
+{
+  "framework": "nextjs",
+  "buildCommand": "npm run build",
+  "installCommand": "npm ci",
+  "env": {
+    "DATABASE_URL": "@keeper-db-url",
+    "NEXT_PUBLIC_APP_URL": "https://keeper.griffinbaker.com"
+  }
+}
+
+

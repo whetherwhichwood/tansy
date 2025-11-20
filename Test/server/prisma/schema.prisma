@@ -1,0 +1,125 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id         Int      @id @default(autoincrement())
+  email      String   @unique
+  password_hash String
+  name       String
+  role       String   @default("administrator")
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  sessions Session[]
+
+  @@map("users")
+}
+
+model Session {
+  id              String    @id @default(uuid())
+  user_id         Int
+  profile_data    Json?
+  recommendations Json?
+  created_at      DateTime  @default(now())
+  expires_at      DateTime
+
+  user User @relation(fields: [user_id], references: [id], onDelete: Cascade)
+
+  @@map("sessions")
+}
+
+model EmployeeProfile {
+  id                    Int      @id @default(autoincrement())
+  session_id            String?  @unique
+  age                   Int
+  zip_code              String
+  state                 String
+  coverage_type         String
+  num_dependents        Int      @default(0)
+  dependent_ages        Int[]
+  ichra_allowance       Decimal  @db.Decimal(10, 2)
+  budget_flexibility    Decimal? @db.Decimal(10, 2)
+  income_level          Decimal? @db.Decimal(10, 2)
+  health_status         String
+  medical_needs         String
+  chronic_conditions    String[]
+  prescription_count    Int      @default(0)
+  preferred_providers   String[]
+  plan_type_preference  String?
+  risk_tolerance        String
+  priorities            Json
+  created_at            DateTime @default(now())
+
+  @@map("employee_profiles")
+}
+
+model Plan {
+  id                Int      @id @default(autoincrement())
+  carrier_name      String
+  plan_name         String
+  plan_type         String
+  metal_tier        String?
+  state             String
+  zip_codes         String[]
+  monthly_premium   Decimal  @db.Decimal(10, 2)
+  annual_deductible Decimal  @db.Decimal(10, 2)
+  oop_maximum       Decimal  @db.Decimal(10, 2)
+  pcp_copay         Decimal? @db.Decimal(10, 2)
+  specialist_copay  Decimal? @db.Decimal(10, 2)
+  er_copay          Decimal? @db.Decimal(10, 2)
+  urgent_care_copay Decimal? @db.Decimal(10, 2)
+  generic_rx_copay  Decimal? @db.Decimal(10, 2)
+  network_type      String?
+  network_size      String?
+  hsa_eligible      Boolean  @default(false)
+  provider_list     String[]
+  formulary         Json?
+  benefits_summary  Json?
+  is_active         Boolean  @default(true)
+  effective_date    DateTime?
+  termination_date  DateTime?
+  created_at        DateTime @default(now())
+  updated_at        DateTime @updatedAt
+
+  recommendations Recommendation[]
+
+  @@map("plans")
+}
+
+model Recommendation {
+  id                    Int      @id @default(autoincrement())
+  session_id            String
+  plan_id               Int
+  rank                  Int
+  total_score           Decimal  @db.Decimal(5, 2)
+  affordability_score   Decimal? @db.Decimal(5, 2)
+  coverage_score        Decimal? @db.Decimal(5, 2)
+  network_score         Decimal? @db.Decimal(5, 2)
+  plan_type_score       Decimal? @db.Decimal(5, 2)
+  oop_protection_score  Decimal? @db.Decimal(5, 2)
+  reasoning             String?
+  key_benefits          Json?
+  trade_offs            Json?
+  budget_analysis       Json?
+  created_at            DateTime @default(now())
+
+  plan Plan @relation(fields: [plan_id], references: [id])
+
+  @@map("recommendations")
+}
+
+
+
+
+
+
+

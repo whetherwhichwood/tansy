@@ -1,0 +1,74 @@
+{
+	"name": "Pregnancy Companion - Your Personal Journey",
+	"short_name": "Pregnancy",
+	"description": "Track your pregnancy journey with personalized weekly updates, tips, and progress tracking",
+	"start_url": "./index.html",
+	"display": "standalone",
+	"orientation": "portrait-primary",
+	"background_color": "#ffffff",
+	"theme_color": "#2563eb",
+	"scope": "./",
+	"lang": "en",
+	"categories": ["health", "lifestyle", "medical"],
+	"icons": [
+		{
+			"src": "icons/favicon.png",
+			"sizes": "192x192",
+			"type": "image/png",
+			"purpose": "any maskable"
+		},
+		{
+			"src": "icons/favicon.png",
+			"sizes": "512x512",
+			"type": "image/png",
+			"purpose": "any maskable"
+		}
+	],
+	"shortcuts": [
+		{
+			"name": "Weekly Update",
+			"short_name": "Week",
+			"description": "View your current week's pregnancy update",
+			"url": "./app.html",
+			"icons": [
+				{
+					"src": "icons/favicon.png",
+					"sizes": "192x192"
+				}
+			]
+		},
+		{
+			"name": "Journal",
+			"short_name": "Journal",
+			"description": "Record your pregnancy thoughts and experiences",
+			"url": "./journal.html",
+			"icons": [
+				{
+					"src": "icons/favicon.png",
+					"sizes": "192x192"
+				}
+			]
+		},
+		{
+			"name": "Progress",
+			"short_name": "Progress",
+			"description": "Track your pregnancy progress and milestones",
+			"url": "./progress.html",
+			"icons": [
+				{
+					"src": "icons/favicon.png",
+					"sizes": "192x192"
+				}
+			]
+		}
+	],
+	"screenshots": [
+		{
+			"src": "icons/favicon.png",
+			"sizes": "1280x720",
+			"type": "image/png",
+			"form_factor": "wide"
+		}
+	],
+	"prefer_related_applications": false
+}

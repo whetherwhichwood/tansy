@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<title>Pregnancy Companion - Login</title>
+	<link rel="icon" type="image/svg+xml" href="favicon.svg" />
+	<link rel="icon" type="image/png" href="icons/favicon.png" />
+	<link rel="manifest" href="manifest.json" />
+	<meta name="theme-color" content="#2563eb" />
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="apple-mobile-web-app-status-bar-style" content="default" />
+	<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+	<div class="app">
+		<header class="header">
+			<h1>Pregnancy Companion</h1>
+		</header>
+
+		<main id="app">
+			<section class="card login-card">
+				<div class="login-header">
+					<h2 class="title">Welcome Back! 🌸</h2>
+					<p class="subtle">Enter your due date to see your personalized pregnancy journey</p>
+				</div>
+
+				<form id="loginForm" class="login-form">
+					<div class="input-group">
+						<label for="email">Email</label>
+						<input type="email" id="email" required />
+					</div>
+					
+					<div class="input-group">
+						<label for="password">Password</label>
+						<input type="password" id="password" required />
+					</div>
+
+					<button type="submit" class="btn-primary login-btn">
+						<span class="btn-text">Log In</span>
+						<span class="btn-icon">🔐</span>
+					</button>
+				</form>
+
+				<div class="login-footer">
+					<p class="disclaimer" id="footerDisclaimer">Educational info only; not medical advice. Consult your provider.</p>
+				</div>
+			</section>
+		</main>
+	</div>
+
+	<script type="module" src="login.js"></script>
+	<script>
+	if ('serviceWorker' in navigator) {
+		window.addEventListener('load', () => {
+			navigator.serviceWorker.register('service-worker.js');
+		});
+	}
+	</script>
+</body>
+</html>

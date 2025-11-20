@@ -1,0 +1,15 @@
+# Proxy file for web scraping tool
+# Format: protocol://host:port or host:port:username:password
+# One proxy per line, lines starting with # are comments
+
+# Example proxies (replace with real proxies)
+# http://127.0.0.1:8080
+# socks5://user:pass@127.0.0.1:1080
+# 192.168.1.100:3128:username:password
+
+
+
+
+
+
+

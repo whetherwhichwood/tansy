@@ -1,0 +1,9 @@
+#DOCKER
+docker login -u uniformdeviations145
+
+<DOCKER_PAT_REMOVED>
+
+#GITHUB
+git clone https://<USERNAME>:<TOKEN>@github.com/<USERNAME>/dockerbot-dev
+git clone https://<USERNAME>:<TOKEN>@github.com/<USERNAME>/osrs_bot
+<GITHUB_PAT_REMOVED>

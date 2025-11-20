@@ -1,0 +1,134 @@
+[
+  {
+    "id": 1,
+    "age": 35,
+    "zip_code": "10001",
+    "state": "NY",
+    "coverage_type": "individual",
+    "num_dependents": 0,
+    "dependent_ages": [],
+    "ichra_allowance": 500.00,
+    "budget_flexibility": 100.00,
+    "income_level": 75000.00,
+    "health_status": "good",
+    "medical_needs": "moderate",
+    "chronic_conditions": [],
+    "prescription_count": 2,
+    "preferred_providers": ["Dr. Smith", "NYC General Hospital"],
+    "plan_type_preference": "PPO",
+    "risk_tolerance": "moderate",
+    "priorities": {
+      "cost": 4,
+      "coverage": 4,
+      "network": 5,
+      "flexibility": 3
+    }
+  },
+  {
+    "id": 2,
+    "age": 42,
+    "zip_code": "90210",
+    "state": "CA",
+    "coverage_type": "family",
+    "num_dependents": 2,
+    "dependent_ages": [8, 12],
+    "ichra_allowance": 800.00,
+    "budget_flexibility": 200.00,
+    "income_level": 120000.00,
+    "health_status": "excellent",
+    "medical_needs": "routine",
+    "chronic_conditions": [],
+    "prescription_count": 0,
+    "preferred_providers": ["Dr. Garcia", "Kaiser Oakland"],
+    "plan_type_preference": "HMO",
+    "risk_tolerance": "low",
+    "priorities": {
+      "cost": 3,
+      "coverage": 5,
+      "network": 4,
+      "flexibility": 2
+    }
+  },
+  {
+    "id": 3,
+    "age": 28,
+    "zip_code": "10001",
+    "state": "NY",
+    "coverage_type": "individual",
+    "num_dependents": 0,
+    "dependent_ages": [],
+    "ichra_allowance": 400.00,
+    "budget_flexibility": 50.00,
+    "income_level": 55000.00,
+    "health_status": "excellent",
+    "medical_needs": "routine",
+    "chronic_conditions": [],
+    "prescription_count": 0,
+    "preferred_providers": [],
+    "plan_type_preference": "HDHP",
+    "risk_tolerance": "high",
+    "priorities": {
+      "cost": 5,
+      "coverage": 2,
+      "network": 3,
+      "flexibility": 4
+    }
+  },
+  {
+    "id": 4,
+    "age": 55,
+    "zip_code": "10001",
+    "state": "NY",
+    "coverage_type": "individual_spouse",
+    "num_dependents": 0,
+    "dependent_ages": [],
+    "ichra_allowance": 600.00,
+    "budget_flexibility": 150.00,
+    "income_level": 95000.00,
+    "health_status": "fair",
+    "medical_needs": "frequent",
+    "chronic_conditions": ["Diabetes", "Hypertension"],
+    "prescription_count": 5,
+    "preferred_providers": ["Dr. Johnson", "Mount Sinai"],
+    "plan_type_preference": "PPO",
+    "risk_tolerance": "low",
+    "priorities": {
+      "cost": 3,
+      "coverage": 5,
+      "network": 5,
+      "flexibility": 4
+    }
+  },
+  {
+    "id": 5,
+    "age": 31,
+    "zip_code": "94102",
+    "state": "CA",
+    "coverage_type": "individual",
+    "num_dependents": 0,
+    "dependent_ages": [],
+    "ichra_allowance": 450.00,
+    "budget_flexibility": 75.00,
+    "income_level": 68000.00,
+    "health_status": "good",
+    "medical_needs": "moderate",
+    "chronic_conditions": ["Asthma"],
+    "prescription_count": 1,
+    "preferred_providers": ["Dr. Martinez", "UCLA Medical Center"],
+    "plan_type_preference": "EPO",
+    "risk_tolerance": "moderate",
+    "priorities": {
+      "cost": 4,
+      "coverage": 4,
+      "network": 4,
+      "flexibility": 3
+    }
+  }
+]
+
+
+
+
+
+
+

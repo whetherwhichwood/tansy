@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Socket.IO Connection Test</title>
+    <script src="https://cdn.socket.io/4.8.1/socket.io.min.js"></script>
+</head>
+<body>
+    <h1>Socket.IO Connection Test</h1>
+    <div id="status">Testing connection...</div>
+    <div id="logs"></div>
+
+    <script>
+        const statusDiv = document.getElementById('status');
+        const logsDiv = document.getElementById('logs');
+        
+        function log(message) {
+            const timestamp = new Date().toLocaleTimeString();
+            logsDiv.innerHTML += `[${timestamp}] ${message}<br>`;
+            console.log(message);
+        }
+
+        log('Attempting to connect to Socket.IO server...');
+        
+        const socket = io('http://localhost:3001', {
+            transports: ['websocket'],
+            autoConnect: true,
+        });
+
+        socket.on('connect', () => {
+            statusDiv.innerHTML = '✅ Connected to Socket.IO server!';
+            statusDiv.style.color = 'green';
+            log('✅ Connected successfully');
+            
+            // Test joining a room
+            socket.emit('join-room', { 
+                roomId: 'test-room', 
+                user: { name: 'Test User', avatar: 'test' } 
+            });
+        });
+
+        socket.on('disconnect', () => {
+            statusDiv.innerHTML = '❌ Disconnected from server';
+            statusDiv.style.color = 'red';
+            log('❌ Disconnected');
+        });
+
+        socket.on('error', (error) => {
+            statusDiv.innerHTML = '❌ Connection error';
+            statusDiv.style.color = 'red';
+            log('❌ Error: ' + error);
+        });
+
+        socket.on('room-joined', (data) => {
+            log('✅ Room joined: ' + JSON.stringify(data));
+        });
+
+        socket.on('participant-joined', (data) => {
+            log('✅ Participant joined: ' + JSON.stringify(data));
+        });
+
+        // Test timeout
+        setTimeout(() => {
+            if (!socket.connected) {
+                statusDiv.innerHTML = '❌ Connection timeout';
+                statusDiv.style.color = 'red';
+                log('❌ Connection timeout after 5 seconds');
+            }
+        }, 5000);
+    </script>
+</body>
+</html>

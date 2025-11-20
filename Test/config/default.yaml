@@ -1,0 +1,60 @@
+# Default configuration for web scraping tool
+
+database:
+  url: "sqlite:///scraper.db"
+  echo: false
+  pool_size: 10
+
+browser:
+  headless: true
+  timeout: 30000
+  viewport:
+    width: 1920
+    height: 1080
+  user_agent_rotation: true
+  stealth_mode: true
+
+proxy:
+  enabled: false
+  file: "proxies.txt"
+  rotation: true
+  timeout: 10
+  health_check_interval: 300
+
+rate_limiting:
+  enabled: true
+  default_rate: 10  # requests per minute
+  burst_limit: 5
+  delay:
+    min: 1.0
+    max: 3.0
+  respect_robots_txt: true
+
+scraping:
+  max_retries: 3
+  retry_delay: 5
+  timeout: 30
+  wait_for_selector_timeout: 10
+
+storage:
+  data_dir: "./data"
+  export_formats: ["json", "csv", "excel"]
+  auto_export: true
+
+logging:
+  level: "INFO"
+  file: "scraper.log"
+  max_size: "10MB"
+  backup_count: 5
+
+scheduler:
+  enabled: true
+  timezone: "UTC"
+  max_workers: 4
+
+
+
+
+
+
+

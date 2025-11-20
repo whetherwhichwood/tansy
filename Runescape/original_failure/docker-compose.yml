@@ -1,0 +1,79 @@
+version: '3.8'
+
+services:
+  # PostgreSQL Database
+  postgres:
+    image: postgres:16
+    container_name: runescape-postgres
+    environment:
+      POSTGRES_DB: runescape_bot
+      POSTGRES_USER: runescape_user
+      POSTGRES_PASSWORD: runescape_password
+    ports:
+      - "5433:5432"  # Using different port to avoid conflicts
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./init-scripts:/docker-entrypoint-initdb.d
+    networks:
+      - runescape-network
+
+  # Redis for caching/session management
+  redis:
+    image: redis:7-alpine
+    container_name: runescape-redis
+    ports:
+      - "6380:6379"  # Using different port to avoid conflicts
+    volumes:
+      - redis_data:/data
+    networks:
+      - runescape-network
+
+  # Main Runescape Bot Application
+  runescape-bot:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: runescape-bot-app
+    environment:
+      - DATABASE_URL=postgresql://runescape_user:runescape_password@postgres:5432/runescape_bot
+      - REDIS_URL=redis://redis:6379
+      - BOT_ENV=development
+    ports:
+      - "8081:8080"
+    volumes:
+      - ./bot-config:/app/config
+      - ./logs:/app/logs
+      - ./screenshots:/app/screenshots
+    depends_on:
+      - postgres
+      - redis
+    networks:
+      - runescape-network
+    restart: unless-stopped
+
+  # Optional: Web interface for bot management
+  bot-web:
+    build:
+      context: .
+      dockerfile: Dockerfile.web
+    container_name: runescape-bot-web
+    environment:
+      - DATABASE_URL=postgresql://runescape_user:runescape_password@postgres:5432/runescape_bot
+      - REDIS_URL=redis://redis:6379
+    ports:
+      - "3001:3000"
+    depends_on:
+      - postgres
+      - redis
+      - runescape-bot
+    networks:
+      - runescape-network
+    restart: unless-stopped
+
+volumes:
+  postgres_data:
+  redis_data:
+
+networks:
+  runescape-network:
+    driver: bridge

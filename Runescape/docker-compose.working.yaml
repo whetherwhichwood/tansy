@@ -1,0 +1,16 @@
+services:
+  # Pre-made VNC Desktop with everything ready
+  runescape-desktop:
+    image: dorowu/ubuntu-desktop-lxde-vnc
+    container_name: runescape-desktop
+    ports:
+      - "6080:80"    # noVNC web interface
+      - "5900:5900"  # VNC port
+    environment:
+      - VNC_PASSWD=vncpassword
+      - VNC_RESOLUTION=1920x1080
+    volumes:
+      - ./persistence:/home/ubuntu/persistence
+      - ./runelite:/home/ubuntu/.runelite
+    restart: unless-stopped
+    shm_size: '512mb'
