@@ -23,6 +23,6 @@
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules", "keeper", "maintenance-tracker", "projects", "resume-api", "tools", "Runescape", "Test", "baby", "bingo", "neighborhood-app", "neighborly", "n8n-local", "website", "docs", "griffin-baker-inc"]
 }
 

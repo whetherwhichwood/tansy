@@ -37,3 +37,11 @@ next-env.d.ts
 # local nodejs installation
 nodejs/
 
+# other projects
+keeper/
+maintenance-tracker/
+Runescape/
+Test/
+baby/
+bingo/
+

@@ -341,7 +341,7 @@ export default function OnboardingChecklist({ items: initialItems, onComplete, o
 
         {allCompleted && (
           <div className="mt-4 p-3 bg-tansy-teal-light rounded-lg text-center text-tansy-teal-dark font-medium">
-            🎉 All set! You're ready to go.
+            🎉 All set! You&apos;re ready to go.
           </div>
         )}
       </div>
@@ -363,7 +363,7 @@ export default function OnboardingChecklist({ items: initialItems, onComplete, o
             {item.id === 'tutorial' && (
               <div className="space-y-4">
                 <p className="text-tansy-gray-darker">
-                  Welcome to Tansy! We're here to help you navigate your healthcare journey.
+                  Welcome to Tansy! We&apos;re here to help you navigate your healthcare journey.
                 </p>
                 <div className="space-y-3">
                   <div className="p-4 bg-tansy-gray-light rounded-lg">
@@ -376,7 +376,7 @@ export default function OnboardingChecklist({ items: initialItems, onComplete, o
                   <div className="p-4 bg-tansy-gray-light rounded-lg">
                     <h4 className="font-semibold text-tansy-gray-darker mb-2">How it works</h4>
                     <p className="text-sm text-tansy-gray-dark">
-                      Simply chat with Tansy about your healthcare needs, and we'll help coordinate 
+                      Simply chat with Tansy about your healthcare needs, and we&apos;ll help coordinate 
                       appointments, verify insurance coverage, and connect you with the right providers.
                     </p>
                   </div>
@@ -533,7 +533,7 @@ export default function OnboardingChecklist({ items: initialItems, onComplete, o
                 </div>
                 <div className="p-3 bg-tansy-teal-light rounded-lg">
                   <p className="text-sm text-tansy-teal-dark">
-                    We'll use this information to show you covered providers and help you make the most of your insurance benefits.
+                    We&apos;ll use this information to show you covered providers and help you make the most of your insurance benefits.
                   </p>
                 </div>
               </div>
